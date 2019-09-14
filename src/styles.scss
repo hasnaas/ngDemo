@@ -1,2 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+$primary-color:purple;
+
+* {
+    font-family: 'Open Sans', sans-serif;
+} 
+
+.navbar-light .navbar-brand {
+    color : $primary-color;
+}
+
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+    color:$primary-color;
+}
+
+.navbar { 
+    border-bottom: 3px solid #e7e7e7;
+  }
