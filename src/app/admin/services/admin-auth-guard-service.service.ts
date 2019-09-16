@@ -1,9 +1,25 @@
 import { Injectable } from '@angular/core';
+import { CanActivate } from '@angular/router';
+import { AuthService } from 'shared/services/auth.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminAuthGuardServiceService {
+export class AdminAuthGuardServiceService implements CanActivate {
 
-  constructor() { }
+  canActivate() {
+
+    return this.authService.user.pipe(
+      map(u => {
+        if (u)
+          if (u.isAdmin)
+            return true;
+          else return false;
+        else
+          return false;
+      })
+    )
+  }
+  constructor(private authService: AuthService) { }
 }

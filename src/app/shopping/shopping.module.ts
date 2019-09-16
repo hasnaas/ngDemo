@@ -17,7 +17,8 @@ import { ShippingCartSummaryComponent } from './components/shipping-cart-summary
     SharedModule
   ],
   exports: [
-    ShoppingCartComponent
+    ShoppingCartComponent,
+    ChekOutComponent
   ]
 })
 export class ShoppingModule { }

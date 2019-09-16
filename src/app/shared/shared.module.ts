@@ -6,6 +6,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
+import { AuthGuardServiceService } from './services/auth-guard-service.service';
 
 
 
@@ -26,7 +29,9 @@ import { ProductQuantityComponent } from './components/product-quantity/product-
     NgbModule
   ],
   providers: [
-
+    AuthService,
+    UserService,
+    AuthGuardServiceService
   ]
 })
 export class SharedModule { }
