@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'shared/services/auth.service';
 import { AppUser } from 'shared/models/app-user.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'bs-navbar',
@@ -10,13 +12,13 @@ import { Router } from '@angular/router';
 })
 export class BsNavbarComponent implements OnInit {
 
-  currentUser: AppUser;
+  currentUser$: Observable<AppUser>;
 
   constructor(private authService: AuthService,
     private router: Router) {
     this.authService.user.subscribe(u => {
-      this.currentUser = u;
-      console.log(this.currentUser);
+      this.currentUser$ = this.authService.appUser$;
+      //console.log(this.currentUser);
     });
   }
 
@@ -26,6 +28,7 @@ export class BsNavbarComponent implements OnInit {
     })
   }
   ngOnInit() {
+
   }
 
 }

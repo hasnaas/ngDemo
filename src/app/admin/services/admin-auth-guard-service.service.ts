@@ -10,7 +10,7 @@ export class AdminAuthGuardServiceService implements CanActivate {
 
   canActivate() {
 
-    return this.authService.user.pipe(
+    return this.authService.appUser$.pipe(
       map(u => {
         if (u)
           if (u.isAdmin)

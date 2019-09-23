@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AppUser } from 'shared/models/app-user.model';
+import { tap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -14,5 +15,11 @@ export class UserService {
 
   save(user: AppUser) {
     this.db.object("/users/" + user.uid).update(user);
+  }
+
+  fetch(uid: string) {
+
+    return this.db.object<AppUser>("/users/" + uid).valueChanges();
+
   }
 }

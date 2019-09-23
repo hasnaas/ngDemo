@@ -2,17 +2,19 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { AppUser } from 'shared/models/app-user.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  user: Observable<AppUser>
+  user: Observable<any>
 
-  constructor(private afAuth: AngularFireAuth) {
+  constructor(private afAuth: AngularFireAuth,
+    private userService: UserService) {
     this.user = this.afAuth.authState.pipe(
 
       map(user => {
@@ -20,8 +22,7 @@ export class AuthService {
           return {
             'uid': user.uid,
             'displayName': user.displayName,
-            'email': user.email,
-            'isAdmin': false
+            'email': user.email
           }
         }
 
@@ -29,6 +30,17 @@ export class AuthService {
           return null;
         }
       }));
+  }
+
+  get appUser$(): Observable<AppUser> {
+    return this.afAuth.authState.pipe(
+      switchMap(user => {
+        if (user)
+          return this.userService.fetch(user.uid);
+        else
+          return of(null);
+      }
+      ));
   }
 
   loginG() {

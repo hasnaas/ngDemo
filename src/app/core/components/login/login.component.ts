@@ -16,10 +16,11 @@ export class LoginComponent implements OnInit {
     private route: ActivatedRoute) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.authService.user.subscribe(u => {
-      if (u)
+      if (u) {
         this.userService.save(u);
+      }
     })
   }
 

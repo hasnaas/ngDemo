@@ -19,20 +19,25 @@
             </li>
         </ul>
 
-        <a routerLink="/login" *ngIf="!currentUser else userDropdown">Login</a>
-        <ng-template #userDropdown>
-            <div ngbDropdown>
-                <a id="dropdownBasic1" ngbDropdownToggle>{{currentUser.displayName}}</a>
-                <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                    <button ngbDropdownItem>My Orders</button>
-                    <button ngbDropdownItem *ngIf="currentUser.isAdmin"
-                        routerLink="/admin-orders">Manage
-                        Orders</button>
-                    <button ngbDropdownItem *ngIf="currentUser.isAdmin">Manage
-                        Products</button>
-                    <button ngbDropdownItem (click)="logout()">Log Out</button>
-                </div>
+
+
+        <div ngbDropdown *ngIf="currentUser$ | async as currentUser;
+            else userLogin">
+            <a id="dropdownBasic1" ngbDropdownToggle>{{currentUser.displayName}}</a>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem>My Orders</button>
+                <button ngbDropdownItem *ngIf="currentUser.isAdmin"
+                    routerLink="/admin-orders">Manage
+                    Orders</button>
+                <button ngbDropdownItem *ngIf="currentUser.isAdmin"
+                    routerLink="/admin-products">Manage
+                    Products</button>
+                <button ngbDropdownItem (click)="logout()">Log Out</button>
             </div>
+        </div>
+
+        <ng-template #userLogin>
+            <a routerLink="/login">Login</a>
         </ng-template>
 
 
