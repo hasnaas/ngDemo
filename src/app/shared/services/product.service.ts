@@ -1,9 +1,40 @@
 import { Injectable } from '@angular/core';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor() { }
+  constructor(private db: AngularFireDatabase) { }
+
+  get productsList$() {
+    return this.db.list("/products/").snapshotChanges().pipe(
+      map(pl => {
+        return pl.map(p => {
+          const data = p.payload.val();
+          const key = p.payload.key;
+          return { key, data };
+        })
+      })
+    )
+  }
+
+  fetchProduct(id: string) {
+    return this.db.object("/products/" + id).valueChanges();
+  }
+
+  get categories$() {
+    return this.db.list("/categories/").snapshotChanges().pipe(
+      map(
+        categories => {
+          return categories.map(categorie => {
+            let key = categorie.key;
+            return { key, ...categorie.payload.val() };
+          })
+        }
+      )
+    )
+  }
 }

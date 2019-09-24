@@ -1,1 +1,45 @@
-<p>product-form works!</p>
+<div class="container d-flex">
+    <form>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title"
+                [(ngModel)]="currentProduct.title">
+        </div>
+
+        <div class="form-group">
+            <label for="price">Price</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="price" name="price"
+                    [(ngModel)]="currentProduct.price">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">&euro;</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="category">Category</label>
+            <select class="form-control" id="category" name="category">
+                <option>{{currentProduct.category}}</option>
+                <option *ngFor="let c of categories" [value]="c.key">{{c.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="url">Image URL</label>
+            <input type="text" id="url" name="url" class="form-control"
+                [(ngModel)]="currentProduct.imageUrl">
+        </div>
+        <button class="btn btn-info">Update</button>
+        <button class="btn btn-danger" type="button">Delete</button>
+    </form>
+
+    <div class="card" style="width: 18rem;">
+        <img [src]="currentProduct.imageUrl" class="card-img-top" alt="Product
+            Image">
+        <div class="card-body">
+            <h5 class="card-title">{{currentProduct.title}}</h5>
+            <p class="card-text">{{ currentProduct.price | currency :"Euro"}}</p>
+        </div>
+    </div>
+</div>

@@ -1,4 +1,6 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
@@ -18,7 +20,7 @@ import { ChekOutComponent } from './shopping/components/chek-out/chek-out.compon
 import { AuthGuardServiceService } from 'shared/services/auth-guard-service.service';
 import { AdminAuthGuardServiceService } from './admin/services/admin-auth-guard-service.service';
 
-
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -43,7 +45,12 @@ import { AdminAuthGuardServiceService } from './admin/services/admin-auth-guard-
       { path: '**', component: NotFoundComponent }
     ])
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr-FR'
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
