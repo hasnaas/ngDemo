@@ -8,7 +8,7 @@ $primary-color:purple;
     font-family: 'Open Sans', sans-serif;
 } 
 
-.navbar-light .navbar-brand {
+.navbar-light .navbar-brand,a {
     color : $primary-color;
 }
 

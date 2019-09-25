@@ -11,15 +11,18 @@ import { AuthGuardServiceService } from './services/auth-guard-service.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { ProductService } from './services/product.service';
-import { RouterModule } from '@angular/router';
+import { CustomFormsModule } from 'ng2-validation'
+import { ToastsService } from './services/toasts.service';
+import { ToastsContainerComponent } from './components/toasts-container/toasts-container.component';
 
 
 
 @NgModule({
-  declarations: [ProductCardComponent, ProductQuantityComponent],
+  declarations: [ProductCardComponent, ProductQuantityComponent, ToastsContainerComponent],
   imports: [
     CommonModule,
     FormsModule,
+    CustomFormsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
@@ -28,16 +31,19 @@ import { RouterModule } from '@angular/router';
   exports: [
     CommonModule,
     FormsModule,
+    CustomFormsModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    DataTableModule
+    DataTableModule,
+    ToastsContainerComponent
   ],
   providers: [
     AuthService,
     UserService,
     AuthGuardServiceService,
-    ProductService
+    ProductService,
+    ToastsService
   ]
 })
 export class SharedModule { }

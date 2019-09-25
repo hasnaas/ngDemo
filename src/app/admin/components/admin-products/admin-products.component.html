@@ -1,5 +1,5 @@
-<div class="container">
-    <p><button class="btn btn-info">New Product</button></p>
+<div class="container" style="padding-top:2rem;">
+    <p><a class="btn btn-info" routerLink="/admin/products/new">New Product</a></p>
     <p><input type="text" class="form-control" [(ngModel)]="keyword"
             (keyup)="filterPlease()" placeholder="Search ..."></p>
 

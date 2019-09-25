@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 export class BsNavbarComponent implements OnInit {
 
   currentUser$: Observable<AppUser>;
+  public isCollapsed = false;
 
   constructor(private authService: AuthService,
     private router: Router) {

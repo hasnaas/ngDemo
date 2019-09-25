@@ -39,8 +39,8 @@ registerLocaleData(localeFr);
 
       { path: 'check-out', component: ChekOutComponent, canActivate: [AuthGuardServiceService] },
 
-      { path: 'admin-orders', component: AdminOrdersComponent, canActivate: [AuthGuardServiceService, AdminAuthGuardServiceService] },
-      { path: 'admin-products', component: AdminProductsComponent, canActivate: [AuthGuardServiceService, AdminAuthGuardServiceService] },
+      { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardServiceService, AdminAuthGuardServiceService] },
+      { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardServiceService, AdminAuthGuardServiceService] },
 
       { path: '**', component: NotFoundComponent }
     ])

@@ -1,45 +1,101 @@
-<div class="container d-flex">
-    <form>
-        <div class="form-group">
-            <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" name="title"
-                [(ngModel)]="currentProduct.title">
-        </div>
+<div class="container">
+    <div class="row justify-content-around" style="margin-top:2rem;">
+        <div class="col-md">
+            <form #productForm="ngForm" style="margin-bottom:2rem;">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title"
+                        name="title" #title="ngModel"
+                        [(ngModel)]="currentProduct.title" required>
+                </div>
+                <div class="alert alert-danger" *ngIf="title.invalid &&
+                    (title.dirty ||
+                    title.touched)">
+                    <p *ngIf="title.errors?.required">The product title is
+                        required</p>
+                </div>
 
-        <div class="form-group">
-            <label for="price">Price</label>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" id="price" name="price"
-                    [(ngModel)]="currentProduct.price">
-                <div class="input-group-append">
-                    <span class="input-group-text" id="basic-addon2">&euro;</span>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <div class="input-group mb-3">
+                        <input type="number" class="form-control" id="price"
+                            name="price" #price="ngModel"
+                            [(ngModel)]="currentProduct.price" required
+                            [min]="0">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="basic-addon2">&euro;</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-danger" *ngIf="price.invalid &&
+                    (price.dirty ||
+                    price.touched)">
+                    <p *ngIf="price.errors?.required">The product price is
+                        required</p>
+                    <p *ngIf="price.errors?.min">The product price cannot be
+                        negative</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" id="category" name="category"
+                        #category="ngModel"
+                        [(ngModel)]="currentProduct.category"
+                        required>
+                        <option *ngIf="currentProduct">{{currentProduct.category}}</option>
+                        <option *ngFor="let c of categories" [value]="c.key">{{c.name}}</option>
+                    </select>
+                </div>
+                <div class="alert alert-danger" *ngIf="category.invalid &&
+                    (category.dirty ||
+                    category.touched)">
+                    <p *ngIf="category.errors?.required">The product category is
+                        required</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="url">Image URL</label>
+                    <input type="text" id="url" name="url" class="form-control"
+                        [(ngModel)]="currentProduct.imageUrl" #url="ngModel"
+                        required url>
+                </div>
+                <div class="alert alert-danger" *ngIf="url.invalid &&
+                    (url.dirty ||
+                    url.touched)">
+                    <p *ngIf="url.errors?.required">The product image URL is
+                        required</p>
+                    <p *ngIf="url.errors?.url">The product image URL is invalid</p>
+                </div>
+
+                <button class="btn btn-info" (click)="update(dangerTpl)"
+                    [disabled]="productForm.invalid">Add/Update</button>
+                <button class="btn btn-danger" type="button"
+                    (click)="delete(dangerTpl); productForm.reset()">Delete</button>
+            </form>
+        </div>
+        <div class="col-md">
+            <div class="card" style="width: 18rem; margin:auto;">
+                <img [src]="currentProduct.imageUrl" class="card-img-top"
+                    alt="Product
+                    Image">
+                <div class="card-body">
+                    <h5 class="card-title">{{currentProduct.title}}</h5>
+                    <p class="card-text">{{ currentProduct.price | currency
+                        :"Euro"}}</p>
                 </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="category">Category</label>
-            <select class="form-control" id="category" name="category">
-                <option>{{currentProduct.category}}</option>
-                <option *ngFor="let c of categories" [value]="c.key">{{c.name}}</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="url">Image URL</label>
-            <input type="text" id="url" name="url" class="form-control"
-                [(ngModel)]="currentProduct.imageUrl">
-        </div>
-        <button class="btn btn-info">Update</button>
-        <button class="btn btn-danger" type="button">Delete</button>
-    </form>
-
-    <div class="card" style="width: 18rem;">
-        <img [src]="currentProduct.imageUrl" class="card-img-top" alt="Product
-            Image">
-        <div class="card-body">
-            <h5 class="card-title">{{currentProduct.title}}</h5>
-            <p class="card-text">{{ currentProduct.price | currency :"Euro"}}</p>
-        </div>
     </div>
 </div>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+<ng-template #dangerTpl>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24"
+        viewBox="0 0 24 24"><path d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79
+            3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869
+            2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512
+            3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639
+            4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438
+            5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98
+            2.982-3.523-8.114z" /></svg>
+        An error has occured, please retry later!
+    </ng-template>
