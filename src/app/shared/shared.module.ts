@@ -36,7 +36,9 @@ import { ToastsContainerComponent } from './components/toasts-container/toasts-c
     AngularFireAuthModule,
     NgbModule,
     DataTableModule,
-    ToastsContainerComponent
+    ToastsContainerComponent,
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   providers: [
     AuthService,

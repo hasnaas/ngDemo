@@ -1,1 +1,12 @@
-<p>home works!</p>
+
+<div class="container d-flex p-2">
+    <div class="list-group">
+        <a class="list-group-item list-group-item-action"
+            (click)="setCategory('All')" [class.active]="currentC=='All'">All
+            categories</a>
+        <a class="list-group-item list-group-item-action" *ngFor="let c of
+            categories" [class.active]="currentC==c.key"
+            (click)="setCategory(c.key)">{{c.name}}</a>
+    </div>
+    <products [category]="currentC"></products>
+</div>

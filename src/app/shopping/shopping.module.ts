@@ -18,6 +18,7 @@ import { ShippingCartSummaryComponent } from './components/shipping-cart-summary
   ],
   exports: [
     ShoppingCartComponent,
+    ProductsComponent,
     ChekOutComponent
   ]
 })

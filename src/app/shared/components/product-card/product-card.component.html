@@ -1,1 +1,12 @@
-<p>product-card works!</p>
+<div class="card" style="width: 18rem;">
+    <img [src]="product.imageUrl" class="card-img-top"
+        alt="Product
+        Image">
+    <div class="card-body">
+        <h5 class="card-title">{{product.title}}</h5>
+        <p class="card-text">{{ product.price | currency
+            :"Euro"}}</p>
+
+    </div>
+    <a routerLink="" class="btn btn-primary">Add to Cart</a>
+</div>

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { map } from 'rxjs/operators';
-import { TouchSequence } from 'selenium-webdriver';
 import { Product } from 'shared/models/product.model';
 
 @Injectable({
@@ -12,7 +11,7 @@ export class ProductService {
   constructor(private db: AngularFireDatabase) { }
 
   get productsList$() {
-    return this.db.list("/products/").snapshotChanges().pipe(
+    return this.db.list<{ "key": string, "data": Product }[]>("/products/").snapshotChanges().pipe(
       map(pl => {
         return pl.map(p => {
           const data = p.payload.val();

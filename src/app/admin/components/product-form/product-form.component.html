@@ -74,7 +74,8 @@
             </form>
         </div>
         <div class="col-md">
-            <div class="card" style="width: 18rem; margin:auto;">
+            <div class="card" style="width: 18rem; margin:auto;"
+                *ngIf="currentProduct.title">
                 <img [src]="currentProduct.imageUrl" class="card-img-top"
                     alt="Product
                     Image">

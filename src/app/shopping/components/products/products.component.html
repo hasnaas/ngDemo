@@ -1,1 +1,5 @@
-<p>products works!</p>
+
+<div class="d-flex flex-wrap">
+    <product-card *ngFor="let p of filteredProducts" [product]="p.data">
+    </product-card>
+</div>
