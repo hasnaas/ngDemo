@@ -8,5 +8,9 @@
             :"Euro"}}</p>
 
     </div>
-    <a routerLink="" class="btn btn-primary">Add to Cart</a>
+    <product-quantity *ngIf="sc.items[product.key]"
+        [shopping-item]="sc.items[product.key]"></product-quantity>
+    <button class="btn btn-primary" (click)="addToCart()"
+        *ngIf="!sc.items[product.key]">Add
+        to Cart</button>
 </div>

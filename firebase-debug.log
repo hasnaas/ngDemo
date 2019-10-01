@@ -1,0 +1,38 @@
+[debug] [2019-10-01T16:35:01.493Z] ----------------------------------------------------------------------
+[debug] [2019-10-01T16:35:01.494Z] Command:       /home/hasna/.local/node/node/bin/node /usr/local/bin/firebase deploy
+[debug] [2019-10-01T16:35:01.495Z] CLI Version:   7.3.1
+[debug] [2019-10-01T16:35:01.495Z] Platform:      linux
+[debug] [2019-10-01T16:35:01.495Z] Node Version:  v10.16.3
+[debug] [2019-10-01T16:35:01.495Z] Time:          Tue Oct 01 2019 17:35:01 GMT+0100 (GMT+01:00)
+[debug] [2019-10-01T16:35:01.495Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-10-01T16:35:01.498Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-10-01T16:35:01.499Z] > authorizing via signed-in user
+[debug] [2019-10-01T16:35:01.499Z] [iam] checking project angulard-fc4ca for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-10-01T16:35:01.500Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-10-01T16:35:01.500Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-10-01T16:35:01.682Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-01T16:35:01.693Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/angulard-fc4ca:testIamPermissions  
+
+[debug] [2019-10-01T16:35:02.460Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-01T16:35:02.465Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/angulard-fc4ca  
+ 
+[debug] [2019-10-01T16:35:02.681Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'angulard-fc4ca'...
+[info] 
+[info] i  deploying hosting
+[debug] [2019-10-01T16:35:02.692Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angulard-fc4ca/versions  
+
+[debug] [2019-10-01T16:35:04.183Z] <<< HTTP RESPONSE 200
+[info] i  hosting[angulard-fc4ca]: beginning deploy...
+[info] i  hosting[angulard-fc4ca]: found 15 files in dist/angular-demo
+[debug] [2019-10-01T16:35:04.192Z] [hosting] hash cache [ZGlzdC9hbmd1bGFyLWRlbW8] load error: lines is not defined
+[debug] [2019-10-01T16:35:04.302Z] [hosting] hash cache [ZGlzdC9hbmd1bGFyLWRlbW8] stored for 15 files
+[debug] [2019-10-01T16:35:04.302Z] [hosting][hash queue][FINAL]
+[debug] [2019-10-01T16:35:04.303Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/angulard-fc4ca/versions/26a3d7ce3dacc1c6:populateFiles  
+ <request body omitted>
+[debug] [2019-10-01T16:35:05.484Z] <<< HTTP RESPONSE 200
+[debug] [2019-10-01T16:35:05.494Z] [hosting][populate queue][FINAL]
+[debug] [2019-10-01T16:35:05.494Z] [hosting] uploads queued: 3

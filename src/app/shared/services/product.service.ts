@@ -11,19 +11,25 @@ export class ProductService {
   constructor(private db: AngularFireDatabase) { }
 
   get productsList$() {
-    return this.db.list<{ "key": string, "data": Product }[]>("/products/").snapshotChanges().pipe(
+    return this.db.list<Product>("/products/").snapshotChanges().pipe(
       map(pl => {
         return pl.map(p => {
           const data = p.payload.val();
           const key = p.payload.key;
-          return { key, data };
+          return { key, ...data };
         })
       })
     )
   }
 
   fetchProduct(id: string) {
-    return this.db.object<Product>("/products/" + id).valueChanges();
+    return this.db.object<Product>("/products/" + id).snapshotChanges().pipe(
+      map(p => {
+        const data = p.payload.val();
+        const key = p.payload.key;
+        return { key, ...data };
+      })
+    )
   }
 
   updateProduct(id: string, value: any) {

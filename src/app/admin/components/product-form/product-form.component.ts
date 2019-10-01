@@ -16,7 +16,8 @@ export class ProductFormComponent implements OnInit {
     "title": "",
     "price": 0,
     "category": "",
-    "imageUrl": ""
+    "imageUrl": "",
+    "key": ""
   };
   currentKey: string = "";
   categories = [];
@@ -82,7 +83,8 @@ export class ProductFormComponent implements OnInit {
         "title": "",
         "price": 0,
         "category": "",
-        "imageUrl": ""
+        "imageUrl": "",
+        "key": ""
       };
     }
   }

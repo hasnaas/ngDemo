@@ -14,6 +14,7 @@ import { ProductService } from './services/product.service';
 import { CustomFormsModule } from 'ng2-validation'
 import { ToastsService } from './services/toasts.service';
 import { ToastsContainerComponent } from './components/toasts-container/toasts-container.component';
+import { ShoppingCartService } from './services/shopping-cart.service';
 
 
 
@@ -45,7 +46,8 @@ import { ToastsContainerComponent } from './components/toasts-container/toasts-c
     UserService,
     AuthGuardServiceService,
     ProductService,
-    ToastsService
+    ToastsService,
+    ShoppingCartService
   ]
 })
 export class SharedModule { }
