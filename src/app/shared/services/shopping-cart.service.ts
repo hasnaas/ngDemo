@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Product } from 'shared/models/product.model';
 import { ShoppingCart } from 'shared/models/shopping-cart.model';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ShoppingCartService {
       return cartId;
     else {
       let createDate = new Date().toDateString();
-      cartId = this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': { "xxx": 0 } }).key;
+      cartId = this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': { 'xxx': { 'title': '000', 'quantity': 0, 'category': 'unexistant', 'price': 0 } } }).key;
       localStorage.setItem("cartId", cartId);
       return cartId;
     }
@@ -26,7 +27,11 @@ export class ShoppingCartService {
   getCart() {
     let cartId = this.getCartId();
 
-    return this.db.object<ShoppingCart>("/shopping-carts/" + cartId).valueChanges();
+    return this.db.object<ShoppingCart>("/shopping-carts/" + cartId).valueChanges().pipe(
+      map(sc => {
+        return new ShoppingCart(sc.items)
+      })
+    );
 
   }
 
@@ -47,9 +52,11 @@ export class ShoppingCartService {
     return this.db.object("/shopping-carts/" + cartId).query.ref.child("items").ref.child(key).remove();
   }
 
-  removeCart() {
-    let cartId = this.getCartId();
-    return this.db.object("/shopping-carts/" + cartId).remove();
+  async removeCart() {
+    let cartId = await this.getCartId();
+    localStorage.removeItem("cartId");
+    this.db.object("/shopping-carts/" + cartId).remove();
+
   }
 
 }

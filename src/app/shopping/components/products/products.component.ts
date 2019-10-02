@@ -19,8 +19,9 @@ export class ProductsComponent implements OnInit, OnChanges {
 
   constructor(private productService: ProductService,
     private shoppingService: ShoppingCartService) {
-    //problem with updates, subsequent changes are not captured
-    this.shoppingService.getCart().subscribe(sc => this.shoppingCart = sc).add(
+    this.shoppingService.getCart().subscribe(sc => {
+      this.shoppingCart = sc;
+    }).add(
       this.productService.productsList$.subscribe(pl => {
         this.allProducts = pl;
         this.filteredProducts = (this.category == 'All' ? pl : pl.filter(p => p.category == this.category));

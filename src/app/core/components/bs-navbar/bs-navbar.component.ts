@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'shared/services/auth.service';
-import { AppUser } from 'shared/models/app-user.model';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { AppUser } from 'shared/models/app-user.model';
+import { ShoppingCart } from 'shared/models/shopping-cart.model';
+import { AuthService } from 'shared/services/auth.service';
+import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 
 
 @Component({
@@ -12,15 +14,14 @@ import { Observable } from 'rxjs';
 })
 export class BsNavbarComponent implements OnInit {
 
+
   currentUser$: Observable<AppUser>;
+  shoppingCart$: Observable<ShoppingCart>;
   public isCollapsed = false;
 
   constructor(private authService: AuthService,
-    private router: Router) {
-    this.authService.user.subscribe(u => {
-      this.currentUser$ = this.authService.appUser$;
-      //console.log(this.currentUser);
-    });
+    private router: Router,
+    private shoppingService: ShoppingCartService) {
   }
 
   logout() {
@@ -28,8 +29,10 @@ export class BsNavbarComponent implements OnInit {
       this.router.navigate([""]);
     })
   }
-  ngOnInit() {
 
+  async ngOnInit() {
+    this.currentUser$ = await this.authService.appUser$;
+    this.shoppingCart$ = await this.shoppingService.getCart();
   }
 
 }
