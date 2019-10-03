@@ -14,23 +14,10 @@ export class ProductQuantityComponent implements OnInit {
   constructor(private shoppingService: ShoppingCartService) { }
 
   addOne() {
-    this.sci.quantity = this.sci.quantity + 1;
-    let key = this.sci.key;
-    let newItem = {};
-    newItem[key] = this.sci;
-    this.shoppingService.setProductQuantity(newItem);
+    this.shoppingService.updateItem(this.sci, +1)
   }
   removeOne() {
-    if (this.sci.quantity > 1) {
-      this.sci.quantity = this.sci.quantity - 1;
-      let key = this.sci.key;
-      let newItem = {};
-      newItem[key] = this.sci;
-      this.shoppingService.setProductQuantity(newItem);
-    }
-    else
-      this.shoppingService.removeItem(this.sci.key);
-
+    this.shoppingService.updateItem(this.sci, -1)
   }
   ngOnInit() {
   }

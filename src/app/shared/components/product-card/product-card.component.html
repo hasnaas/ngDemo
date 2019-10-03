@@ -8,9 +8,9 @@
             :"Euro"}}</p>
 
     </div>
-    <product-quantity *ngIf="sc.items[product.key]"
-        [shopping-item]="sc.items[product.key]"></product-quantity>
-    <button class="btn btn-primary" (click)="addToCart()"
-        *ngIf="!sc.items[product.key]">Add
-        to Cart</button>
+    <product-quantity *ngIf="sc.getQuantity(product.key); else newToCart"
+        [shopping-item]="sc.itemsMap[product.key]"></product-quantity>
+    <ng-template #newToCart>
+        <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
+    </ng-template>
 </div>

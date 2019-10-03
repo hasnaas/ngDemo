@@ -46,8 +46,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     UserService,
     AuthGuardServiceService,
     ProductService,
-    ToastsService,
-    ShoppingCartService
+    ToastsService
   ]
 })
 export class SharedModule { }

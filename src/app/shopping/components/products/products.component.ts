@@ -1,8 +1,7 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
-import { Product } from 'shared/models/product.model';
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { ShoppingCart } from 'shared/models/shopping-cart.model';
 import { ProductService } from 'shared/services/product.service';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
-import { ShoppingCart } from 'shared/models/shopping-cart.model';
 
 @Component({
   selector: 'products',
@@ -19,13 +18,7 @@ export class ProductsComponent implements OnInit, OnChanges {
 
   constructor(private productService: ProductService,
     private shoppingService: ShoppingCartService) {
-    this.shoppingService.getCart().subscribe(sc => {
-      this.shoppingCart = sc;
-    }).add(
-      this.productService.productsList$.subscribe(pl => {
-        this.allProducts = pl;
-        this.filteredProducts = (this.category == 'All' ? pl : pl.filter(p => p.category == this.category));
-      }))
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -34,7 +27,15 @@ export class ProductsComponent implements OnInit, OnChanges {
   }
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    (await this.shoppingService.getCart()).subscribe(sc => {
+      this.shoppingCart = sc;
+    }).add(
+      this.productService.productsList$.subscribe(pl => {
+        this.allProducts = pl;
+        this.filteredProducts = (this.category == 'All' ? pl : pl.filter(p => p.category == this.category));
+      }))
+
   }
 
 }

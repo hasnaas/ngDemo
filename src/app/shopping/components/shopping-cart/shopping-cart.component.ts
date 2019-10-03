@@ -11,7 +11,6 @@ import { Observable } from 'rxjs';
 export class ShoppingCartComponent implements OnInit {
 
   cart$: Observable<ShoppingCart>;
-  ObjectKeys = Object.keys;
 
   constructor(private shoppingCart: ShoppingCartService) { }
 
