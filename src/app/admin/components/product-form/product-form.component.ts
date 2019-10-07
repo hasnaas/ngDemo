@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'shared/services/product.service';
 import { ToastsService } from 'shared/services/toasts.service';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Product } from 'shared/models/product.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
   styleUrls: ['./product-form.component.scss']
 })
-export class ProductFormComponent implements OnInit {
+export class ProductFormComponent implements OnInit, OnDestroy {
 
   currentProduct: Product = {
     "title": "",
@@ -21,6 +22,7 @@ export class ProductFormComponent implements OnInit {
   };
   currentKey: string = "";
   categories = [];
+  DataS: Subscription;
 
   constructor(private route: ActivatedRoute,
     private productService: ProductService,
@@ -29,13 +31,15 @@ export class ProductFormComponent implements OnInit {
     private modalService: NgbModal) { }
 
   ngOnInit() {
-    this.productService.categories$.subscribe(cs => this.categories = cs);
+    this.DataS = this.productService.categories$.subscribe(cs => this.categories = cs);
     this.currentKey = this.route.snapshot.paramMap.get('key') || '';
     if (this.currentKey)
       this.productService.fetchProduct(this.currentKey).subscribe(p => this.currentProduct = p);
   }
 
-
+  ngOnDestroy() {
+    this.DataS.unsubscribe();
+  }
 
 
   update(errorTemplate) {

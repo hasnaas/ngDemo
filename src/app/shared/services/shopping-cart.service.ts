@@ -11,18 +11,15 @@ import { ShoppingCart } from 'shared/models/shopping-cart.model';
 export class ShoppingCartService {
 
   constructor(private db: AngularFireDatabase) {
-
   }
 
-  async getCartId(): Promise<string> {
 
+  async getCartId(): Promise<string> {
     let cartId = localStorage.getItem("cartId");
-    console.log("local storage check in :" + cartId);
     if (cartId)
       return cartId;
     else {
       let createDate = new Date().getTime();
-      console.log("cart db creation");
       let result = await this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': { 'xxx': { 'title': '000', 'quantity': 0, 'category': 'unexistant', 'price': 0 } } });
       //let result = await this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': {} });
       cartId = result.key;
@@ -31,12 +28,16 @@ export class ShoppingCartService {
     }
   }
 
+
   async getCart(): Promise<Observable<ShoppingCart>> {
     let cartId = await this.getCartId();
     return this.db.object<ShoppingCart>("/shopping-carts/" + cartId).valueChanges().pipe(
       map(sc => {
         // console.log(sc.items);
-        return new ShoppingCart(sc.items)
+        if (sc)
+          return new ShoppingCart(sc.items);
+        else
+          return new ShoppingCart({});
       })
     );
   }

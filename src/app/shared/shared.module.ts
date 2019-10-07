@@ -1,20 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableModule } from "angular-6-datatable";
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { OrderSuccessComponent } from 'app/shopping/components/order-success/order-success.component';
+import { CustomFormsModule } from 'ng2-validation';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
+import { ToastsContainerComponent } from './components/toasts-container/toasts-container.component';
 import { AuthGuardServiceService } from './services/auth-guard-service.service';
 import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
+import { OrderService } from './services/order.service';
 import { ProductService } from './services/product.service';
-import { CustomFormsModule } from 'ng2-validation'
 import { ToastsService } from './services/toasts.service';
-import { ToastsContainerComponent } from './components/toasts-container/toasts-container.component';
-import { ShoppingCartService } from './services/shopping-cart.service';
+import { UserService } from './services/user.service';
 
 
 
@@ -27,7 +29,10 @@ import { ShoppingCartService } from './services/shopping-cart.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule,
-    DataTableModule
+    DataTableModule,
+    RouterModule.forChild([
+      { path: "order-success/:id", component: OrderSuccessComponent }
+    ])
   ],
   exports: [
     CommonModule,
@@ -44,6 +49,7 @@ import { ShoppingCartService } from './services/shopping-cart.service';
   providers: [
     AuthService,
     UserService,
+    OrderService,
     AuthGuardServiceService,
     ProductService,
     ToastsService

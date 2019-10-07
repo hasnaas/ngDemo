@@ -1,1 +1,75 @@
-<p>chek-out works!</p>
+<div class="row">
+    <div class="col-md-6">
+    <form #shippingForm="ngForm">
+            <h2>Shipping</h2>
+        <div class="form-group">
+            <label for="name">
+                Name
+            </label>
+            <input type="text" class="form-control" id="name"
+                name="name" #name="ngModel" [(ngModel)]="shippingDetails.name"
+                required>
+        </div>
+        <div class="alert alert-danger" *ngIf="name.invalid &&
+            (name.dirty ||
+            name.touched)">
+            <p *ngIf="name.errors?.required">The name is
+                required</p>
+            <!--p *ngIf="name.errors?.min">The product price cannot be
+                negative</p-->
+        </div>
+
+        <div class="form-group">
+            <label for="address1">
+                Address
+            </label>
+            <input type="text" class="form-control" id="address1"
+                name="address1" #address1="ngModel" 
+                placeholder="line 1" [(ngModel)]="shippingDetails.address1" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="address1.invalid &&
+            (address1.dirty ||
+            address1.touched)">
+            <p *ngIf="address1.errors?.required">Address is
+                required</p>
+        </div>
+
+        <div class="form-group">
+            <input type="text" class="form-control" id="address2"
+                name="address1" 
+                placeholder="line 2" [(ngModel)]="shippingDetails.address2">
+        </div>
+
+        <div class="form-group">
+            <label for="city">
+                City
+            </label>
+            <input type="text" class="form-control" id="city"
+                name="city"  #city="ngModel" [(ngModel)]="shippingDetails.city" required>
+        </div>
+        <div class="alert alert-danger" *ngIf="city.invalid &&
+        (city.dirty ||
+        city.touched)">
+        <p *ngIf="city.errors?.required">City is
+            required</p>
+        </div>
+
+        <button class="btn btn-primary" style="float:right" [disabled]="shippingForm.invalid" (click)="placeOrder(dangerTpl)">Place Order</button>
+    </form>
+</div>
+<div class="col-md-6">
+    <shipping-cart-summary [shopping-cart]="shoppingCart"> </shipping-cart-summary>
+</div>
+</div>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>
+<ng-template #dangerTpl>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24"
+            viewBox="0 0 24 24"><path d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79
+                3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869
+                2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512
+                3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639
+                4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438
+                5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98
+                2.982-3.523-8.114z" /></svg>
+            An error has occured, please retry later!
+        </ng-template>

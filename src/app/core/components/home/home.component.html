@@ -1,6 +1,7 @@
-
-<div class="container d-flex p-2">
-    <div class="list-group">
+<button class="btn btn-primary" [ngbCollapse]="!isCollapsed"
+    (click)="isCollapsed=!isCollapsed">Categories</button>
+<div class="d-flex" *ngIf="displayShop">
+    <div class="list-group" [ngbCollapse]="isCollapsed">
         <a class="list-group-item list-group-item-action"
             (click)="setCategory('All')" [class.active]="currentC=='All'">All
             categories</a>

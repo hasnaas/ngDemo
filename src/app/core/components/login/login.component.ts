@@ -1,14 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'shared/services/auth.service';
 import { UserService } from 'shared/services/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
+
+  DataS: Subscription;
 
   constructor(private authService: AuthService,
     private userService: UserService,
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
   }
 
   async ngOnInit() {
-    this.authService.user.subscribe(u => {
+    this.DataS = this.authService.user.subscribe(u => {
       if (u) {
         this.userService.save(u);
       }
@@ -36,6 +39,10 @@ export class LoginComponent implements OnInit {
 
   pending() {
     alert("Not implemented");
+  }
+
+  ngOnDestroy() {
+    this.DataS.unsubscribe();
   }
 
 }

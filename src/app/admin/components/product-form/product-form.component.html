@@ -67,9 +67,9 @@
                     <p *ngIf="url.errors?.url">The product image URL is invalid</p>
                 </div>
 
-                <button class="btn btn-info" (click)="update(dangerTpl)"
+                <button class="btn btn-primary" (click)="update(dangerTpl)"
                     [disabled]="productForm.invalid">Add/Update</button>
-                <button class="btn btn-danger" type="button"
+                <button class="btn btn-danger" type="button" style="float:right"
                     (click)="delete(dangerTpl); productForm.reset()">Delete</button>
             </form>
         </div>

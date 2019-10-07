@@ -6,20 +6,25 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
 import { OrderSuccessComponent } from './components/order-success/order-success.component';
 import { ProductsComponent } from './components/products/products.component';
 import { ShippingFormComponent } from './components/shipping-form/shipping-form.component';
-import { ShippingCartComponent } from './components/shipping-cart/shipping-cart.component';
 import { ShippingCartSummaryComponent } from './components/shipping-cart-summary/shipping-cart-summary.component';
+import { RouterModule } from '@angular/router';
+import { AuthGuardServiceService } from 'shared/services/auth-guard-service.service';
 
 
 
 @NgModule({
-  declarations: [ShoppingCartComponent, ChekOutComponent, MyOrdersComponent, OrderSuccessComponent, ProductsComponent, ShippingFormComponent, ShippingCartComponent, ShippingCartSummaryComponent],
+  declarations: [ShoppingCartComponent, ChekOutComponent, MyOrdersComponent, OrderSuccessComponent, ProductsComponent, ShippingFormComponent, ShippingCartSummaryComponent],
   imports: [
-    SharedModule
+    SharedModule,
+    RouterModule.forChild([
+      { path: 'check-out', component: ChekOutComponent, canActivate: [AuthGuardServiceService] },
+    ])
   ],
   exports: [
     ShoppingCartComponent,
     ProductsComponent,
-    ChekOutComponent
+    ChekOutComponent,
+    MyOrdersComponent
   ]
 })
 export class ShoppingModule { }

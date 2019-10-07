@@ -10,6 +10,7 @@ import { ShoppingCartService } from 'shared/services/shopping-cart.service';
 export class ProductQuantityComponent implements OnInit {
 
   @Input('shopping-item') sci: ShoppingCartItem;
+  @Input('short-display') sd: boolean;
 
   constructor(private shoppingService: ShoppingCartService) { }
 

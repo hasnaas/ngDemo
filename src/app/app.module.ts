@@ -19,6 +19,7 @@ import { AdminModule } from './admin/admin.module';
 import { ChekOutComponent } from './shopping/components/chek-out/chek-out.component';
 import { AuthGuardServiceService } from 'shared/services/auth-guard-service.service';
 import { AdminAuthGuardServiceService } from './admin/services/admin-auth-guard-service.service';
+import { MyOrdersComponent } from './shopping/components/my-orders/my-orders.component';
 
 registerLocaleData(localeFr);
 
@@ -37,7 +38,7 @@ registerLocaleData(localeFr);
       { path: '', component: HomeComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
 
-      { path: 'check-out', component: ChekOutComponent, canActivate: [AuthGuardServiceService] },
+      { path: 'my-orders', component: MyOrdersComponent, canActivate: [AuthGuardServiceService] },
 
       { path: 'admin/orders', component: AdminOrdersComponent, canActivate: [AuthGuardServiceService, AdminAuthGuardServiceService] },
       { path: 'admin/products', component: AdminProductsComponent, canActivate: [AuthGuardServiceService, AdminAuthGuardServiceService] },

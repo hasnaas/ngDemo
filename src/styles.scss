@@ -19,3 +19,16 @@ $primary-color:purple;
 .navbar { 
     border-bottom: 3px solid #e7e7e7;
   }
+
+  
+  .list-group-item.active {
+    z-index: 2;
+    color: #fff !important;
+    background-color: $primary-color;
+    border-color:$primary-color;
+}
+
+.btn-primary, .btn-primary:hover{
+    background-color:$primary-color;
+    border-color:$primary-color;
+  }

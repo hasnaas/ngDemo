@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ShoppingCart } from 'shared/models/shopping-cart.model';
 
 @Component({
-  selector: 'app-shipping-cart-summary',
+  selector: 'shipping-cart-summary',
   templateUrl: './shipping-cart-summary.component.html',
   styleUrls: ['./shipping-cart-summary.component.scss']
 })
 export class ShippingCartSummaryComponent implements OnInit {
+
+  @Input('shopping-cart') cart: ShoppingCart;
 
   constructor() { }
 

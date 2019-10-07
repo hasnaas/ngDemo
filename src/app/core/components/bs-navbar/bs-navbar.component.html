@@ -26,7 +26,8 @@
                     else userLogin">
                     <a id="dropdownBasic1" ngbDropdownToggle>{{currentUser.displayName}}</a>
                     <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <button ngbDropdownItem>My Orders</button>
+                        <button ngbDropdownItem routerLink="/my-orders">My
+                            Orders</button>
                         <button ngbDropdownItem *ngIf="currentUser.isAdmin"
                             routerLink="/admin/orders">Manage
                             Orders</button>

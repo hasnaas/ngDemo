@@ -1,18 +1,20 @@
-import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, OnDestroy } from '@angular/core';
 import { ShoppingCart } from 'shared/models/shopping-cart.model';
 import { ProductService } from 'shared/services/product.service';
 import { ShoppingCartService } from 'shared/services/shopping-cart.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss']
 })
-export class ProductsComponent implements OnInit, OnChanges {
+export class ProductsComponent implements OnInit, OnChanges, OnDestroy {
 
   allProducts = [];
   filteredProducts = [];
   shoppingCart: ShoppingCart;
+  DataS: Subscription;
   @Input("category") category: string;
 
 
@@ -28,14 +30,19 @@ export class ProductsComponent implements OnInit, OnChanges {
 
 
   async ngOnInit() {
-    (await this.shoppingService.getCart()).subscribe(sc => {
+
+    this.DataS = (await this.shoppingService.getCart()).subscribe(sc => {
       this.shoppingCart = sc;
-    }).add(
+    }
+    ).add(
       this.productService.productsList$.subscribe(pl => {
         this.allProducts = pl;
         this.filteredProducts = (this.category == 'All' ? pl : pl.filter(p => p.category == this.category));
-      }))
-
+      })
+    );
   }
 
+  ngOnDestroy() {
+    this.DataS.unsubscribe();
+  }
 }

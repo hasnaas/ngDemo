@@ -4,12 +4,11 @@
         Image">
     <div class="card-body">
         <h5 class="card-title">{{product.title}}</h5>
-        <p class="card-text">{{ product.price | currency
-            :"Euro"}}</p>
+        <p class="card-text">{{ product.price | currency :'EUR'}}</p>
 
     </div>
     <product-quantity *ngIf="sc.getQuantity(product.key); else newToCart"
-        [shopping-item]="sc.itemsMap[product.key]"></product-quantity>
+        [shopping-item]="sc.itemsMap[product.key]" [short-display]="false"></product-quantity>
     <ng-template #newToCart>
         <button class="btn btn-primary" (click)="addToCart()">Add to Cart</button>
     </ng-template>

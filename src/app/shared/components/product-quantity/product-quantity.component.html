@@ -1,5 +1,5 @@
 <div class="text-center">
     <button class="btn btn-dark" (click)="addOne()" style="float:left">+</button>
-    {{sci.quantity}} in cart
+    {{sci.quantity}} <span [hidden]="sd">in cart</span>
     <button class="btn btn-dark" (click)="removeOne()" style="float:right">-</button>
 </div>

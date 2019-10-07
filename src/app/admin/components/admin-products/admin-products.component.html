@@ -1,5 +1,5 @@
-<div class="container" style="padding-top:2rem;">
-    <p><a class="btn btn-info" routerLink="/admin/products/new">New Product</a></p>
+<div style="padding-top:2rem;">
+    <p><a class="btn btn-primary" routerLink="/admin/products/new">New Product</a></p>
     <p><input type="text" class="form-control" [(ngModel)]="keyword"
             (keyup)="filterPlease()" placeholder="Search ..."></p>
 
@@ -11,10 +11,10 @@
                 <th>
                 </th>
                 <th>
-                    <mfDefaultSorter by="data.title">Tilte</mfDefaultSorter>
+                    <mfDefaultSorter by="title">Tilte</mfDefaultSorter>
                 </th>
                 <th>
-                    <mfDefaultSorter by="data.price">Price</mfDefaultSorter>
+                    <mfDefaultSorter by="price">Price</mfDefaultSorter>
                 </th>
                 <th>
                 </th>
@@ -23,8 +23,8 @@
         <tbody>
             <tr *ngFor="let item of mf.data; let i= index">
                 <td>{{i + 1}}</td>
-                <td>{{item.data.title}}</td>
-                <td>{{item.data.price | currency:'EUR' }}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.price | currency:'EUR' }}</td>
                 <td><a routerLink="/admin/products/{{item.key}}">edit</a></td>
             </tr>
         </tbody>
