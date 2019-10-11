@@ -42,29 +42,38 @@ export class ProductFormComponent implements OnInit, OnDestroy {
   }
 
 
-  update(errorTemplate) {
-    if (this.currentKey)
-      this.productService.updateProduct(this.currentKey, this.currentProduct).then(() => {
+  async update(errorTemplate) {
+    if (this.currentKey) {
+      try {
+        await this.productService.updateProduct(this.currentKey, this.currentProduct);
         this.toastService.show("Product successfully updated", { classname: 'bg-success text-light' });
         let _this = this;
         setTimeout(function () {
           _this.router.navigate(["/admin/products/"]);
         }, 2500);
-      }).catch(error => {
+      }
+      catch (error) {
         this.toastService.show(errorTemplate, { classname: 'bg-danger text-light', delay: 3000 });
         console.log(error);
-      })
-    else
-      this.productService.addProduct(this.currentProduct).then((productRef) => {
+      }
+    }
+    else {
+      try {
+        let toAdd = {};
+        Object.assign(toAdd, this.currentProduct);
+        delete toAdd["key"];
+        await this.productService.addProduct(toAdd);
         this.toastService.show("Product successfully added", { classname: 'bg-success text-light' });
         let _this = this;
         setTimeout(function () {
           _this.router.navigate(["/admin/products/"]);
         }, 2500);
-      }).catch(error => {
+      }
+      catch (error) {
         this.toastService.show(errorTemplate, { classname: 'bg-danger text-light', delay: 3000 });
         console.log(error);
-      })
+      }
+    }
   }
 
   delete(errorTemplate) {

@@ -33,7 +33,7 @@ export class OrderService {
           const data = o.payload.val();
           const key = o.payload.key;
           return { key, ...data };
-        }).filter(o => o["uid"] = uid)
+        }).filter(o => o["uid"] == uid)
       })
     )
   }

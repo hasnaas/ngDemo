@@ -16,12 +16,13 @@ export class MyOrdersComponent implements OnInit {
 
   constructor(private orderService: OrderService,
     private authService: AuthService) {
-    this.oList$ = this.authService.appUser$.pipe(
-      switchMap(u => this.orderService.getUserOrders$(u.uid))
-    )
+
   }
 
   ngOnInit() {
+    this.oList$ = this.authService.appUser$.pipe(
+      switchMap(u => this.orderService.getUserOrders$(u.uid))
+    )
   }
 
 }

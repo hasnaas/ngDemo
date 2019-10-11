@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { AppUser } from 'shared/models/app-user.model';
-import { tap } from 'rxjs/operators';
+
 
 
 @Injectable({

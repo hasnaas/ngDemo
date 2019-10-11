@@ -13,10 +13,10 @@ export class AdminOrdersComponent implements OnInit {
   oList$: Observable<Order[]>;
 
   constructor(private orderService: OrderService) {
-    this.oList$ = this.orderService.ordersList$;
   }
 
   ngOnInit() {
+    this.oList$ = this.orderService.ordersList$;
   }
 
 }

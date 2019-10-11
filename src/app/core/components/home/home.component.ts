@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from 'shared/services/product.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppModule } from 'app/app.module';
 import { Subscription } from 'rxjs';
+import { ProductService } from 'shared/services/product.service';
 
 @Component({
   selector: 'app-home',
@@ -20,15 +19,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router) {
-
-    this.DataS = this.route.queryParamMap.subscribe(qpm => {
-      this.currentC = qpm.get("category") || 'All'
-
-    }).add(
-      this.productService.categories$.subscribe(cs => {
-        this.categories = cs;
-      }));
-
   }
 
   setCategory(key: string) {
@@ -37,6 +27,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.DataS = this.route.queryParamMap.subscribe(qpm => {
+      this.currentC = qpm.get("category") || 'All'
+
+    }).add(
+      this.productService.categories$.subscribe(cs => {
+        this.categories = cs;
+      }));
     setTimeout(() => { this.displayShop = true }, 2000);
   }
 

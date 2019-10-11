@@ -15,17 +15,17 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   DataS: Subscription;
 
   constructor(private productService: ProductService) {
-    this.DataS = this.productService.productsList$.subscribe(pl => {
-      this.productsList = pl;
-      this.filteredProductsList = pl;
-    })
   }
 
   filterPlease() {
-    this.filteredProductsList = this.productsList.filter(p => p.data.title.toLowerCase().includes(this.keyword))
+    this.filteredProductsList = this.productsList.filter(p => p.title.toLowerCase().includes(this.keyword))
   }
 
   ngOnInit() {
+    this.DataS = this.productService.productsList$.subscribe(pl => {
+      this.productsList = pl;
+      this.filteredProductsList = pl;
+    });
     this.keyword = "";
   }
 
