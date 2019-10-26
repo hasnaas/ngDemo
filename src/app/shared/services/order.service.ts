@@ -31,8 +31,8 @@ export class OrderService {
       map(ol => {
         return ol.map(o => {
           const data = o.payload.val();
-          const key = o.payload.key;
-          return { key, ...data };
+          const oid = o.payload.key;
+          return { oid, ...data };
         }).filter(o => o["uid"] == uid)
       })
     )
