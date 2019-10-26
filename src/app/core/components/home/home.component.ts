@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   categories: any[];
   currentC: string = 'All';
   displayShop: boolean = false;
-  isCollapsed = false;
+  isCollapsed = true;
   DataS: Subscription;
 
   constructor(private productService: ProductService,

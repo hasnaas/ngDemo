@@ -20,8 +20,7 @@ export class ShoppingCartService {
       return cartId;
     else {
       let createDate = new Date().getTime();
-      let result = await this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': { 'xxx': { 'title': '000', 'quantity': 0, 'category': 'unexistant', 'price': 0 } } });
-      //let result = await this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': {} });
+      let result = await this.db.list("/shopping-carts/").push({ 'cdate': createDate, 'items': {} });
       cartId = result.key;
       localStorage.setItem("cartId", cartId);
       return cartId;
@@ -44,8 +43,7 @@ export class ShoppingCartService {
 
   async removeCart() {
     let cartId = await this.getCartId();
-    //temporary, must use remove() instead of setting to a bogus object
-    this.db.object("/shopping-carts/" + cartId).query.ref.child("items").set({ 'xxx': { 'title': '000', 'quantity': 0, 'category': 'unexistant', 'price': 0 } })
+    this.db.object("/shopping-carts/" + cartId).query.ref.child("items").remove();
   }
 
   removeItem(cartId: string, productId: string) {

@@ -25,9 +25,8 @@ export class BsNavbarComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout().then(() => {
-      this.router.navigate([""]);
-    })
+    this.router.navigate([""]);
+    this.authService.logout();
   }
 
   async ngOnInit() {

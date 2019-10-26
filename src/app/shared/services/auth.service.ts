@@ -22,7 +22,8 @@ export class AuthService {
           return {
             'uid': user.uid,
             'displayName': user.displayName,
-            'email': user.email
+            'email': user.email,
+            'isAdmin': true
           }
         }
 
